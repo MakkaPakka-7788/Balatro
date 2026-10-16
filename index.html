@@ -206,7 +206,29 @@ function move(s,from,to){if(!['round','shop'].includes(s.phase)||!Number.isInteg
 const api={move,HANDS,SUITS,CHARMS,BOSSES,newRun,evaluate,preview,play,discard,buy,sell,reroll,next,target,boss};
 if(typeof module!=='undefined')module.exports=api;else root.AH=api;
 })(typeof window==='undefined'?globalThis:window);
+<script>
+function openFlashcards() {
+    window.location.href = "https://makkapakka-7788.github.io/MAKKASENTPAKKING-PoRtfolio/flashcard.html";
+}
 
+let rCount = 0;
+let rTimer = null;
+
+document.addEventListener("keydown", function(e) {
+    if (e.key.toLowerCase() !== "r") return;
+
+    rCount++;
+    clearTimeout(rTimer);
+
+    rTimer = setTimeout(function() {
+        rCount = 0;
+    }, 700);
+
+    if (rCount === 3) {
+        rCount = 0;
+        window.location.href = "https://makkapakka-7788.github.io/MAKKASENTPAKKING-PoRtfolio/flashcard.html";
+    }
+});
 </script><script>
 /* Original procedural pixel illustrations, drawn on a 16 × 16 grid. */
 (function(root){
