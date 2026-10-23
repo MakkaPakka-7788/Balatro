@@ -28,7 +28,48 @@ body:before{content:'';position:fixed;inset:-45%;pointer-events:none;background:
 @media(max-width:600px){aside .side-buttons{display:flex;grid-column:1/-1;margin:0;gap:7px}aside .side-buttons button{font-size:9px;padding:8px 3px}}
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
 
-</style></head>
+</style>
+<script>
+/* MakkaPakka RRR home shortcut */
+(function () {
+  let rrrTapCount = 0;
+  let rrrResetTimer = null;
+
+  window.addEventListener("keydown", function (event) {
+    if (!event.key || event.key.toLowerCase() !== "r") {
+      if (!event.repeat) {
+        rrrTapCount = 0;
+        clearTimeout(rrrResetTimer);
+      }
+      return;
+    }
+
+    const target = event.target;
+    if ((target instanceof Element && target.closest("input, textarea, select, [contenteditable='true'], [contenteditable='']")) ||
+        event.ctrlKey || event.altKey || event.metaKey) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (event.repeat) return;
+
+    rrrTapCount += 1;
+    clearTimeout(rrrResetTimer);
+
+    if (rrrTapCount === 3) {
+      rrrTapCount = 0;
+      window.location.href = "https://makkapakka-7788.github.io/makkapakka/?games=true";
+      return;
+    }
+
+    rrrResetTimer = setTimeout(function () {
+      rrrTapCount = 0;
+    }, 850);
+  }, true);
+})();
+</script>
+</head>
 <body><div class="grain" aria-hidden="true"></div><div class="game-shell" id="gameShell"><header><a class="brand" href="./">AFTER HOURS<span>POKER ROGUELIKE</span></a><nav><button id="collection">Jokers <span>50</span></button><button id="sound" aria-pressed="false">♫ OFF</button><button id="speed">Speed 1×</button><button id="guide">?</button></nav></header>
 <main><aside><section class="blind-panel"><div class="blind-heading" id="blindName">SMALL BLIND</div><div class="blind-body"><div class="blind-token" id="blindToken" aria-hidden="true">◉</div><div class="blind-target"><span>Score at least</span><strong id="target">300</strong><span id="blindReward">Reward: $$$$$</span></div></div><p id="bossText">Beat the target to advance.</p><div id="rounds" class="rounds"></div></section><section class="score-panel"><span>Round score</span><b id="score">0</b><div class="track"><i id="progress"></i></div></section><section class="calculation"><div id="preview" class="preview"></div></section><div class="stats"><div class="stat-hands"><span>Hands</span><b id="hands">4</b></div><div class="stat-discards"><span>Discards</span><b id="discards">3</b></div><div class="stat-money"><b id="money">$8</b></div><div class="stat-ante"><span>Ante</span><b><span id="ante">1</span><small>/8</small></b></div><div class="stat-round"><span>Round</span><b id="roundNumber">1</b></div></div><div class="side-buttons"><button id="reference">Run info</button><button id="new">New run</button></div><div class="side-foot"><span id="saveStatus">Saves automatically</span></div></aside>
 <div class="table"><section class="jokers-section"><div class="section-label"><span>Jokers <em id="slots">1 / 5</em></span><small>Click to inspect or reorder</small></div><div id="charms" class="charms"></div></section><section id="playArea" class="play-area"><div id="result" class="result" aria-live="polite">Play cards to score</div><div id="playedCards" class="played-cards"></div><div id="scoreBurst" class="score-burst" aria-live="polite"></div><div class="table-watermark" aria-hidden="true">AFTER<br>HOURS</div><div class="hand-zone"><div id="hand" class="hand"></div><div class="hand-bottom"><div class="actions"><button id="play" class="primary">Play Hand</button><button id="discard" class="secondary">Discard</button></div><div class="hand-meta"><span id="selectedCount">Select up to 5 cards</span><div class="sort-buttons"><span>Sort hand</span><button id="rankSort">Rank</button><button id="suitSort">Suit</button></div></div><div class="deck-visual" aria-label="Draw pile"><div class="deck-back"></div><span id="deckCount">44/52</span></div></div></div><div id="particles" class="particles" aria-hidden="true"></div></section><section id="shop" class="shop" hidden></section><section class="history"><div class="section-label"><span>Last hands</span><small id="best">Best · 0</small></div><div id="history"></div></section></div></main><footer><span>1–8 select · Enter play · D discard · Esc clear</span><span>NO REAL MONEY. JUST BIG NUMBERS.</span></footer></div>
