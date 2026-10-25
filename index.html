@@ -430,4 +430,6 @@ $('guide').onclick=()=>{if(busy)return;showModal('<div class="eyebrow">AFTER HOU
 document.addEventListener('keydown',e=>{if($('modal').open||busy||s.phase!=='round'||e.ctrlKey||e.metaKey||e.altKey||e.repeat)return;if(/^[1-8]$/.test(e.key)){e.preventDefault();let c=handCards()[Number(e.key)-1];if(c)toggle(c.id);}else if(e.key==='Enter'&&e.target.tagName!=='BUTTON'){e.preventDefault();$('play').click();}else if(e.key.toLowerCase()==='d'){e.preventDefault();$('discard').click();}else if(e.key==='Escape'){s.selected=[];render();}});
 render();
 
-</script></body></html>
+</script>
+<script type="module" src="https://makkapakka-7788.github.io/makkapakka/presence.js?game=balatro"></script>
+</body></html>
